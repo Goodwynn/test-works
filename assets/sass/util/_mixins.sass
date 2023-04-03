@@ -1,0 +1,10 @@
+// Addaptive font-size
+@use "sass:math"
+=fz-adapt ($minSize, $maxSize, $minWidth: 375, $maxWidth: 1920)
+  $minSizeRem: math.div($minSize, 16)
+  $maxSizeRem: math.div($maxSize, 16)
+  $minWidthRem: math.div($minWidth, 16)
+  $maxWidthRem: math.div($maxWidth, 16)
+  $slope: math.div($maxSizeRem - $minSizeRem, $maxWidthRem - $minWidthRem)
+  $yAxisIntersection: -$minWidthRem * $slope + $minSizeRem
+  font-size: clamp(#{$minSizeRem + 'rem'}, #{$yAxisIntersection + 'rem'} + #{$slope * 100 + 'vw'}, #{$maxSizeRem + 'rem'})
